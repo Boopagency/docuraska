@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Doçuras.Ka · Doces finos, brigadeiros e bolos</title>
+<meta name="description" content="Doces finos, brigadeiros e bolos feitos à mão em São José dos Pinhais – PR. Faça seu pedido ou peça um orçamento pelo WhatsApp.">
+<meta name="theme-color" content="#EFA3C8">
+<meta property="og:title" content="Doçuras.Ka · Doceria artesanal">
+<meta property="og:description" content="Doces finos, brigadeiros e bolos feitos à mão. Faça seu pedido ou peça um orçamento.">
+<link rel="icon" href="assets/favicon.png" type="image/png">
+<link rel="preload" href="assets/fonts/bricolage-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/hero.jpg" as="image">
+<style>
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  font-style: normal;
+  font-weight: 300 800;
+  font-stretch: 75% 100%;
+  font-display: swap;
+  src: url(assets/fonts/bricolage-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  font-style: normal;
+  font-weight: 300 800;
+  font-stretch: 75% 100%;
+  font-display: swap;
+  src: url(assets/fonts/bricolage-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+  [hidden] { display: none !important; }
+  /* Doçuras.Ka · link na bio
+     Layout: foto de doces em tela cheia que se dissolve no rosa da logo, com o nome marrom por cima (a logo como ela é);
+     a conversa vem no branco, com o rosa nos destaques. No computador, foto fixa à esquerda e conversa à direita.
+     Raio é 0 ou pílula. Uma fonte só, em dois cortes: display estreito e texto. */
+  :root {
+    --branco: #FFFFFF;     /* plano da conversa */
+    --rosa-claro: #FFF1F7; /* superfícies e toque */
+    --rosa: #EFA3C8;       /* o rosa da logo: botão principal, destaque, faixa */
+    --rosa-forte: #C2457F; /* rosa para texto pequeno (4,7:1 sobre o branco) */
+    --tinta: #3A0F24;      /* texto: quase preto puxado para o rosa (16:1 no branco, 8:1 no rosa) */
+    --tinta-2: #7A4560;    /* texto de apoio (7:1) */
+    --traco: rgba(58, 15, 36, .13);
+    --traco-forte: rgba(58, 15, 36, .28);
+    --balao: #D9FDD3;      /* balão de mensagem enviada no WhatsApp */
+    --fonte: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+    --pilula: 999px;
+    color-scheme: light;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; background: var(--branco); color: var(--tinta); font: 400 16px/1.55 var(--fonte); -webkit-font-smoothing: antialiased; }
+  a, button { -webkit-tap-highlight-color: transparent; }
+  button, input, textarea { font: inherit; color: inherit; }
+  img { display: block; max-width: 100%; }
+  svg { flex-shrink: 0; }
+  :focus-visible { outline: 2px solid var(--rosa-forte); outline-offset: 3px; }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+
+  .rotulo { margin: 0; font-size: 12px; line-height: 1.2; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--rosa-forte); }
+
+  /* foto ---------------------------------------------------------------- */
+  .bio-media { position: relative; height: min(48svh, 540px); min-height: 320px; overflow: hidden; background: var(--rosa); }
+  .bio-media > img {
+    width: 100%; height: 100%; object-fit: cover; object-position: 50% 35%;
+    -webkit-mask-image: linear-gradient(to bottom, #000 40%, rgba(0,0,0,.25) 80%, transparent 96%); mask-image: linear-gradient(to bottom, #000 40%, rgba(0,0,0,.25) 80%, transparent 96%);
+  }
+  .bio-marca { position: absolute; left: max(20px, env(safe-area-inset-left, 0px)); bottom: 14px; width: min(250px, 66%); margin: 0; }
+  .bio-marca img { width: 100%; height: auto; }
+  .previa {
+    position: absolute; top: 14px; left: max(14px, env(safe-area-inset-left, 0px)); padding: 7px 12px; border-radius: var(--pilula);
+    background: var(--branco); color: var(--tinta); font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+  }
+
+  /* conversa ------------------------------------------------------------ */
+  .bio-main {
+    width: 100%; max-width: 560px; margin: 0 auto;
+    padding-block: 18px 40px; padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px));
+  }
+  .bio-topo { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-bottom: 14px; border-bottom: 1px solid var(--traco); font-size: 14px; font-weight: 500; color: var(--tinta-2); }
+
+  h1 {
+    margin: 22px 0 0; max-width: 15ch; text-wrap: balance;
+    font-size: clamp(34px, 9.4vw, 52px); line-height: 1.04; font-weight: 700; font-stretch: 82%; letter-spacing: -.02em;
+  }
+  h1 em {
+    display: inline-flex; align-items: center; gap: .14em; padding: 0 .22em 0 .26em; margin-top: .08em;
+    border-radius: var(--pilula); background: var(--rosa); font-style: normal; white-space: nowrap; transform: rotate(-1.5deg);
+  }
+  h1 em img { width: .78em; height: auto; transform: translateY(-.02em); }
+
+  .acoes { display: flex; flex-direction: column; gap: 10px; margin-top: 26px; }
+  .cta {
+    display: flex; align-items: center; justify-content: space-between; gap: 14px; width: 100%; min-height: 64px;
+    padding: 8px 8px 8px 24px; border: 1px solid var(--traco-forte); border-radius: var(--pilula);
+    background: var(--branco); color: var(--tinta); text-align: left; text-decoration: none; cursor: pointer;
+    transition: background-color .2s, border-color .2s;
+  }
+  .cta strong { display: block; font-size: 17px; line-height: 1.2; font-weight: 600; letter-spacing: -.01em; }
+  .cta small { display: block; margin-top: 2px; font-size: 13px; line-height: 1.25; color: var(--tinta-2); }
+  .cta:hover { background: var(--rosa-claro); border-color: var(--rosa-forte); }
+  .cta:active { transform: scale(.985); }
+  .cta--cheio { background: var(--rosa); border-color: var(--rosa); }
+  .cta--cheio small { color: var(--tinta); opacity: .8; }
+  .cta--cheio:hover { background: #F4B6D4; border-color: #F4B6D4; }
+  .seta { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; background: var(--rosa-claro); color: var(--tinta); }
+  .cta--cheio .seta { background: var(--tinta); color: var(--branco); }
+  .seta svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .nota { margin: 14px 0 0; font-size: 13px; color: var(--tinta-2); text-align: center; }
+
+  section { margin-top: 56px; }
+  section > .rotulo { margin-bottom: 16px; }
+
+  /* "como funciona" numa faixa rosa de ponta a ponta */
+  .faixa {
+    margin-left: calc(-1 * max(20px, env(safe-area-inset-left, 0px))); margin-right: calc(-1 * max(20px, env(safe-area-inset-right, 0px)));
+    padding: 32px max(20px, env(safe-area-inset-right, 0px)) 12px max(20px, env(safe-area-inset-left, 0px)); background: var(--rosa);
+  }
+  .faixa > .rotulo { color: var(--tinta); }
+  .passos { list-style: none; margin: 0; padding: 0; counter-reset: p; }
+  .passos li { counter-increment: p; display: grid; grid-template-columns: 44px 1fr; gap: 4px 12px; padding: 16px 0; border-top: 1px solid rgba(58, 15, 36, .16); }
+  .passos li::before { content: "0" counter(p); grid-row: span 2; font-size: 22px; line-height: 1.1; font-weight: 700; font-stretch: 82%; color: var(--tinta); font-variant-numeric: tabular-nums; }
+  .passos strong { font-size: 17px; line-height: 1.3; font-weight: 600; }
+  .passos span { font-size: 15px; color: var(--tinta); opacity: .82; }
+
+  .vitrine { display: flex; gap: 10px; margin: 0 calc(-1 * max(20px, env(safe-area-inset-right, 0px))) 0 0; padding-right: 20px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+  .vitrine::-webkit-scrollbar { display: none; }
+  .vitrine figure { flex: 0 0 min(58%, 220px); margin: 0; scroll-snap-align: start; }
+  .vitrine img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+  .vitrine figcaption { margin-top: 8px; font-size: 14px; font-weight: 500; }
+  .link-seta { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; margin-top: 8px; font-size: 15px; font-weight: 600; color: var(--rosa-forte); text-decoration: none; }
+  .link-seta svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; }
+
+  .quem { display: grid; grid-template-columns: 112px 1fr; gap: 18px; align-items: center; padding: 18px; background: var(--rosa-claro); }
+  .quem img { width: 112px; aspect-ratio: 4 / 5; object-fit: cover; object-position: 30% 10%; }
+  .quem blockquote { margin: 0; min-width: 0; }
+  .quem p { margin: 0; font-size: 20px; line-height: 1.25; font-weight: 600; font-stretch: 88%; letter-spacing: -.01em; }
+  .quem footer { margin-top: 10px; font-size: 14px; color: var(--tinta-2); }
+
+  .rodape { display: flex; flex-wrap: wrap; gap: 6px 20px; margin-top: 48px; padding-top: 18px; border-top: 1px solid var(--traco); font-size: 13px; color: var(--tinta-2); }
+  .rodape a, .rodape button { padding: 0; border: 0; background: none; color: inherit; text-decoration: none; cursor: pointer; min-height: 32px; display: inline-flex; align-items: center; }
+  .rodape a:hover, .rodape button:hover { color: var(--tinta); }
+
+  /* formulários --------------------------------------------------------- */
+  .janela {
+    width: 100%; max-width: 100%; max-height: 92svh; margin: auto 0 0; padding: 0; overflow: auto;
+    border: 0; border-top: 4px solid var(--rosa); background: var(--branco); color: var(--tinta);
+  }
+  .janela::backdrop { background: rgba(58, 15, 36, .5); }
+  .janela form, .janela .corpo {
+    display: flex; flex-direction: column; gap: 18px;
+    padding-block: 22px calc(22px + env(safe-area-inset-bottom, 0px));
+    padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px));
+  }
+  .janela-topo { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+  .janela h2 { margin: 6px 0 0; font-size: 30px; line-height: 1.02; font-weight: 700; font-stretch: 82%; letter-spacing: -.02em; }
+  .janela-lead { margin: 6px 0 0; font-size: 15px; color: var(--tinta-2); }
+  .fechar { display: grid; place-items: center; width: 44px; height: 44px; margin: -8px -12px 0 0; border: 0; background: none; cursor: pointer; color: var(--tinta-2); }
+  .fechar svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.6; }
+  .campo { display: flex; flex-direction: column; gap: 8px; font-size: 14px; font-weight: 500; color: var(--tinta-2); }
+  .campo small, .grupo small { font-size: inherit; font-weight: 400; opacity: .8; }
+  .campo input, .campo textarea {
+    width: 100%; min-height: 52px; padding: 13px 14px; border: 1px solid var(--traco-forte); border-radius: 0;
+    background: var(--branco); color: var(--tinta); font-size: 16px; line-height: 1.4; -webkit-appearance: none; appearance: none;
+  }
+  .campo textarea { min-height: 88px; resize: vertical; }
+  .campo input::placeholder, .campo textarea::placeholder { color: rgba(122, 69, 96, .6); }
+  .campo input:focus, .campo textarea:focus { outline: none; border-color: var(--rosa-forte); box-shadow: inset 0 0 0 1px var(--rosa-forte); }
+  [aria-invalid="true"] { border-color: #C0392B !important; }
+  .grupo { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; border: 0; min-width: 0; }
+  .grupo legend { padding: 0; margin-bottom: 10px; font-size: 14px; font-weight: 500; color: var(--tinta-2); }
+  .grupo label { position: relative; }
+  .grupo input { position: absolute; inset: 0; margin: 0; opacity: 0; cursor: pointer; }
+  .grupo span { display: inline-flex; align-items: center; min-height: 42px; padding: 0 16px; border: 1px solid var(--traco-forte); border-radius: var(--pilula); font-size: 15px; }
+  .grupo input:checked + span { background: var(--rosa); border-color: var(--rosa); font-weight: 600; }
+  .grupo input:focus-visible + span { outline: 2px solid var(--rosa-forte); outline-offset: 2px; }
+  .armadilha { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .erro { margin: 0; font-size: 14px; color: #B42318; }
+  .erro:empty { display: none; }
+  .enviar { justify-content: center; gap: 10px; padding: 0 24px; font-size: 17px; font-weight: 600; }
+  .enviar svg { width: 22px; height: 22px; fill: currentColor; }
+  .legal { margin: -6px 0 0; font-size: 12px; text-align: center; color: var(--tinta-2); }
+  .msg { margin: 0; padding: 14px 16px; background: var(--balao); color: #111B21; font-size: 16px; line-height: 1.45; white-space: pre-line; }
+
+  @media (min-width: 640px) {
+    .janela { width: min(560px, calc(100% - 48px)); margin: auto; border: 1px solid var(--traco); border-top: 4px solid var(--rosa); }
+  }
+
+  /* computador: foto fixa à esquerda, conversa à direita ------------------ */
+  @media (min-width: 1024px) {
+    .bio { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); min-height: 100svh; }
+    .bio-media { position: sticky; top: 0; height: 100svh; max-height: none; }
+    .bio-media > img {
+      -webkit-mask-image: linear-gradient(to bottom, #000 50%, rgba(0,0,0,.25) 82%, transparent 97%); mask-image: linear-gradient(to bottom, #000 50%, rgba(0,0,0,.25) 82%, transparent 97%);
+    }
+    .bio-marca { left: 48px; bottom: 44px; width: 300px; }
+    .bio-main { max-width: 520px; padding-block: 72px 48px; }
+    .vitrine { margin-right: 0; padding-right: 0; }
+    .faixa { margin-left: 0; margin-right: 0; padding-left: 24px; padding-right: 24px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .cta { transition: none; } .cta:active { transform: none; } }
+</style>
+</head>
+<body>
+<div class="bio">
+  <header class="bio-media">
+    <img src="assets/hero.jpg" alt="Bandeja de doces da Ka: morangos e cerejas em copinhos de chocolate e corações de maracujá." width="512" height="774">
+    <span class="previa" hidden>Prévia</span>
+    <p class="bio-marca"><img src="assets/wordmark.png" alt="Doçuras.Ka · Doceria artesanal" width="710" height="205"></p>
+  </header>
+
+  <main class="bio-main">
+    <div class="bio-topo">
+      <span>Sob encomenda · São José dos Pinhais</span>
+    </div>
+
+    <h1>Doces finos, brigadeiros e bolos <em>feitos à mão<img src="assets/abelha.png" alt="" width="225" height="250"></em></h1>
+
+    <nav class="acoes" aria-label="O que você quer fazer">
+      <button type="button" class="cta cta--cheio" data-abre="pedido">
+        <span><strong>Fazer meu pedido</strong><small>Já sei o que quero</small></span>
+        <span class="seta"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </button>
+      <button type="button" class="cta" data-abre="orcamento">
+        <span><strong>Pedir orçamento</strong><small>Festa, evento ou presente</small></span>
+        <span class="seta"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </button>
+      <a class="cta" href="#cardapio" data-cardapio>
+        <span><strong>Ver o cardápio</strong><small>Sabores e preços</small></span>
+        <span class="seta"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+      </a>
+    </nav>
+    <p class="nota">Leva um minuto. Depois a conversa segue no WhatsApp com a Ka.</p>
+
+    <section class="faixa" aria-labelledby="como">
+      <p class="rotulo" id="como">Como funciona</p>
+      <ol class="passos">
+        <li><strong>Você escolhe o caminho</strong><span>Pedido, se já sabe o que quer. Orçamento, para festa e evento.</span></li>
+        <li><strong>Conta os detalhes</strong><span>Data, quantidade e ocasião, em menos de um minuto.</span></li>
+        <li><strong>A Ka responde no WhatsApp</strong><span>Com valores, prazo e como você recebe.</span></li>
+      </ol>
+    </section>
+
+    <section aria-labelledby="cozinha">
+      <p class="rotulo" id="cozinha">Da cozinha da Ka</p>
+      <div class="vitrine">
+        <figure><img src="assets/doces-finos.jpg" alt="Bandeja de doces finos com morango, coco e chocolate." loading="lazy"><figcaption>Doces finos</figcaption></figure>
+        <figure><img src="assets/bolo.jpg" alt="Bolo em camadas de chocolate e creme, coberto de morangos e brigadeiros." loading="lazy"><figcaption>Bolos</figcaption></figure>
+        <figure><img src="assets/ig1.jpg" alt="Morango cravejado mordido, com o morango aparecendo." loading="lazy" style="object-position: 50% 30%"><figcaption>Morango cravejado</figcaption></figure>
+        <figure><img src="assets/ig3.jpg" alt="Copo da felicidade com camadas de brigadeiro e uvas." loading="lazy"><figcaption>Copo da felicidade</figcaption></figure>
+      </div>
+      <a class="link-seta" href="https://www.instagram.com/docuras.ka/" target="_blank" rel="noopener noreferrer">Ver mais no @docuras.ka <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+    </section>
+
+    <section aria-labelledby="quem">
+      <p class="rotulo" id="quem">Quem faz</p>
+      <div class="quem">
+        <img src="assets/ka-rua.jpg" alt="A Ka sorrindo, com o uniforme da Doçuras.Ka." loading="lazy">
+        <blockquote>
+          <p>“Todos os brigadeiros sou eu que faço. Então são todos artesanais.”</p>
+          <footer>Ka, da Doçuras.Ka</footer>
+        </blockquote>
+      </div>
+    </section>
+
+    <footer class="rodape">
+      <a href="https://www.instagram.com/docuras.ka/" target="_blank" rel="noopener noreferrer">@docuras.ka</a>
+      <a href="#cardapio" data-cardapio>Cardápio</a>
+      <span>São José dos Pinhais · PR</span>
+    </footer>
+  </main>
+</div>
+
+<!-- Pedido: para quem já sabe o que quer -->
+<dialog class="janela" id="pedido" aria-labelledby="pedido-titulo">
+  <form novalidate data-intro="fazer um pedido">
+    <div class="janela-topo">
+      <div><p class="rotulo">Pedido · 1 minuto</p><h2 id="pedido-titulo">Seu pedido</h2><p class="janela-lead">Para quem já conhece e quer pedir.</p></div>
+      <button type="button" class="fechar" aria-label="Fechar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    </div>
+    <label class="campo">Seu nome<input id="pedido-nome" name="nome" autocomplete="name" maxlength="80" required></label>
+    <label class="campo">Seu WhatsApp<input id="pedido-whatsapp" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel-national" placeholder="(41) 99999-9999" maxlength="16" required></label>
+    <label class="campo">O que você quer pedir?<textarea id="pedido-itens" name="itens" data-rotulo="Pedido" maxlength="500" placeholder="Ex.: 30 brigadeiros e 2 copos da felicidade" required></textarea></label>
+    <label class="campo"><span>Para quando? <small>opcional</small></span><input id="pedido-data" name="data" type="date" data-rotulo="Para"></label>
+    <fieldset class="grupo" data-rotulo="Recebe como">
+      <legend>Como prefere receber? <small>opcional</small></legend>
+      <label><input type="radio" name="receber" value="Retirada"><span>Retirar</span></label>
+      <label><input type="radio" name="receber" value="Entrega"><span>Entrega</span></label>
+    </fieldset>
+    <label class="armadilha" aria-hidden="true">Não preencha<input id="pedido-site" name="site" tabindex="-1" autocomplete="off"></label>
+    <p class="erro" role="alert"></p>
+    <button class="cta cta--cheio enviar" type="submit"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#whats"/></svg>Enviar pedido pelo WhatsApp</button>
+    <p class="legal">A Ka usa esses dados só para responder você.</p>
+  </form>
+</dialog>
+
+<!-- Orçamento: chega para a Ka com o que ela precisa para dar o valor -->
+<dialog class="janela" id="orcamento" aria-labelledby="orcamento-titulo">
+  <form novalidate data-intro="um orçamento">
+    <div class="janela-topo">
+      <div><p class="rotulo">Orçamento</p><h2 id="orcamento-titulo">Conte da sua festa</h2><p class="janela-lead">Com isso a Ka já responde com valores.</p></div>
+      <button type="button" class="fechar" aria-label="Fechar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    </div>
+    <label class="campo">Seu nome<input id="orcamento-nome" name="nome" autocomplete="name" maxlength="80" required></label>
+    <label class="campo">Seu WhatsApp<input id="orcamento-whatsapp" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel-national" placeholder="(41) 99999-9999" maxlength="16" required></label>
+    <fieldset class="grupo" data-rotulo="Ocasião" data-obrigatorio>
+      <legend>Qual a ocasião?</legend>
+      <label><input type="radio" name="ocasiao" value="Aniversário"><span>Aniversário</span></label>
+      <label><input type="radio" name="ocasiao" value="Casamento"><span>Casamento</span></label>
+      <label><input type="radio" name="ocasiao" value="15 anos"><span>15 anos</span></label>
+      <label><input type="radio" name="ocasiao" value="Chá ou batizado"><span>Chá ou batizado</span></label>
+      <label><input type="radio" name="ocasiao" value="Empresa"><span>Empresa</span></label>
+      <label><input type="radio" name="ocasiao" value="Presente"><span>Presente</span></label>
+    </fieldset>
+    <label class="campo">Data do evento<input id="orcamento-data" name="data" type="date" data-rotulo="Data"></label>
+    <fieldset class="grupo" data-rotulo="Convidados">
+      <legend>Quantos convidados?</legend>
+      <label><input type="radio" name="convidados" value="Até 30"><span>Até 30</span></label>
+      <label><input type="radio" name="convidados" value="30 a 60"><span>30 a 60</span></label>
+      <label><input type="radio" name="convidados" value="60 a 100"><span>60 a 100</span></label>
+      <label><input type="radio" name="convidados" value="Mais de 100"><span>Mais de 100</span></label>
+    </fieldset>
+    <fieldset class="grupo" data-rotulo="Quer orçar">
+      <legend>O que você quer orçar? <small>pode marcar vários</small></legend>
+      <label><input type="checkbox" name="itens" value="Brigadeiros"><span>Brigadeiros</span></label>
+      <label><input type="checkbox" name="itens" value="Doces finos"><span>Doces finos</span></label>
+      <label><input type="checkbox" name="itens" value="Bolo"><span>Bolo</span></label>
+      <label><input type="checkbox" name="itens" value="Morango cravejado"><span>Morango cravejado</span></label>
+      <label><input type="checkbox" name="itens" value="Copo da felicidade"><span>Copo da felicidade</span></label>
+      <label><input type="checkbox" name="itens" value="Lembrancinhas"><span>Lembrancinhas</span></label>
+    </fieldset>
+    <label class="campo"><span>Onde vai ser? <small>opcional</small></span><input id="orcamento-local" name="local" data-rotulo="Local" maxlength="120" placeholder="Bairro e cidade"></label>
+    <label class="campo"><span>Algo mais? <small>opcional</small></span><textarea id="orcamento-obs" name="obs" data-rotulo="Obs." maxlength="500" placeholder="Tema, cores, sabores preferidos…"></textarea></label>
+    <label class="armadilha" aria-hidden="true">Não preencha<input id="orcamento-site" name="site" tabindex="-1" autocomplete="off"></label>
+    <p class="erro" role="alert"></p>
+    <button class="cta cta--cheio enviar" type="submit"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#whats"/></svg>Pedir orçamento pelo WhatsApp</button>
+    <p class="legal">A Ka usa esses dados só para responder você.</p>
+  </form>
+</dialog>
+
+<!-- Só na prévia: o cardápio ainda não chegou, e o envio mostra a mensagem em vez de abrir o WhatsApp -->
+<dialog class="janela" id="cardapio-previa" aria-labelledby="cardapio-titulo">
+  <div class="corpo">
+    <div class="janela-topo">
+      <div><p class="rotulo">Prévia</p><h2 id="cardapio-titulo">Cardápio</h2></div>
+      <button type="button" class="fechar" aria-label="Fechar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    </div>
+    <p class="janela-lead">Este botão abre o cardápio da Ka direto, em PDF ou imagem, sem formulário. Entra assim que ela mandar o arquivo.</p>
+  </div>
+</dialog>
+<dialog class="janela" id="enviado" aria-labelledby="enviado-titulo">
+  <div class="corpo">
+    <div class="janela-topo">
+      <div><p class="rotulo">Prévia</p><h2 id="enviado-titulo">A Ka recebe assim no WhatsApp</h2></div>
+      <button type="button" class="fechar" aria-label="Fechar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    </div>
+    <p class="msg"></p>
+    <p class="janela-lead">Publicado, este passo abre direto a conversa com a Ka. Aqui o número ainda é de exemplo.</p>
+  </div>
+</dialog>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="whats" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></symbol></svg>
+
+<script>
+  // Configuração (ver README). Enquanto PREVIA for true, aparece o selo "Prévia" e o envio mostra a
+  // mensagem em vez de abrir o WhatsApp: o número abaixo ainda é de exemplo.
+  // ponytail: LEADS_URL vazio = os contatos não ficam guardados; apontar para a planilha ou o Comercial do Boop Admin.
+  const PREVIA = true;
+  const WHATSAPP = "5541900000000";
+  const CARDAPIO_URL = "";
+  const LEADS_URL = "";
+
+  const $ = (sel, el = document) => el.querySelector(sel);
+  const $$ = (sel, el = document) => [...el.querySelectorAll(sel)];
+
+  $(".previa").hidden = !PREVIA;
+  $$(".fechar").forEach(b => b.addEventListener("click", () => b.closest("dialog").close()));
+  $$("dialog").forEach(d => d.addEventListener("click", e => { if (e.target === d) d.close(); }));
+
+  // Cardápio: abre direto, sem formulário.
+  $$("[data-cardapio]").forEach(a => {
+    if (CARDAPIO_URL) { a.href = CARDAPIO_URL; a.target = "_blank"; a.rel = "noopener noreferrer"; return; }
+    a.addEventListener("click", e => { e.preventDefault(); $("#cardapio-previa").showModal(); });
+  });
+
+  // Pedido e orçamento: um formulário para cada.
+  $$("[data-abre]").forEach(b => b.addEventListener("click", () => {
+    const d = document.getElementById(b.dataset.abre);
+    d.showModal();
+    $("[name=nome]", d).focus();
+  }));
+
+  const hoje = new Date(Date.now() - new Date().getTimezoneOffset() * 6e4).toISOString().slice(0, 10);
+  $$("input[type=date]").forEach(i => i.min = hoje);
+
+  // WhatsApp do Brasil, do DDD em diante; formata como (41) 99999-9999 enquanto digita.
+  const digitos = v => { const d = v.replace(/\D/g, ""); return (/^55\d{10,11}$/.test(d) ? d.slice(2) : d).slice(0, 11); };
+  $$("[name=whatsapp]").forEach(i => i.addEventListener("input", () => {
+    const d = digitos(i.value), corte = d.length === 11 ? 7 : 6;
+    i.value = d.length <= 2 ? (d ? `(${d}` : "") : d.length <= 6 ? `(${d.slice(0, 2)}) ${d.slice(2)}` : `(${d.slice(0, 2)}) ${d.slice(2, corte)}-${d.slice(corte)}`;
+  }));
+  $$("form").forEach(f => f.addEventListener("input", e => { e.target.removeAttribute("aria-invalid"); $(".erro", f).textContent = ""; }));
+
+  // Cada campo com data-rotulo vira uma linha da mensagem, na ordem do formulário.
+  function linhas(form) {
+    return $$("[data-rotulo]", form).flatMap(el => {
+      const valor = el.tagName === "FIELDSET" ? $$("input:checked", el).map(i => i.value).join(", ")
+        : el.type === "date" ? el.value.split("-").reverse().join("/") : el.value.replace(/\s+/g, " ").trim();
+      return valor ? [`${el.dataset.rotulo}: ${valor}`] : [];
+    });
+  }
+
+  $$("form").forEach(form => form.addEventListener("submit", async e => {
+    e.preventDefault();
+    const erro = $(".erro", form);
+    const falha = (el, msg) => { el.setAttribute("aria-invalid", "true"); el.focus(); erro.textContent = msg; };
+    const nome = form.nome.value.replace(/\s+/g, " ").trim();
+    const fone = digitos(form.whatsapp.value);
+    if (nome.length < 2) return falha(form.nome, "Como a Ka pode te chamar?");
+    if (!/^[1-9]{2}\d{8,9}$/.test(fone)) return falha(form.whatsapp, "Confira o WhatsApp, com DDD.");
+    if (form.itens?.tagName === "TEXTAREA" && form.itens.value.trim().length < 3) return falha(form.itens, "Conte o que você quer pedir.");
+    const grupo = $("[data-obrigatorio]", form);
+    if (grupo && !$("input:checked", grupo)) { $("input", grupo).focus(); erro.textContent = "Escolha a ocasião."; return; }
+
+    const texto = [`Oi, Ka! Sou ${nome}. Vim pelo link da bio e quero ${form.dataset.intro}.`, ...linhas(form)].join("\n");
+    if (LEADS_URL && !form.site.value) {
+      // Se a rede falhar, a conversa abre do mesmo jeito.
+      await fetch(LEADS_URL, { method: "POST", keepalive: true, headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ nome, whatsapp: fone, tipo: form.closest("dialog").id, mensagem: texto, origem: location.search }) }).catch(() => {});
+    }
+    if (!PREVIA) { location.href = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(texto)}`; return; }
+    form.closest("dialog").close();
+    $("#enviado .msg").textContent = texto;
+    $("#enviado").showModal();
+  }));
+</script>
+</body>
+</html>
