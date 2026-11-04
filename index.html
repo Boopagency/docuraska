@@ -74,7 +74,7 @@
     width: 100%; height: 100%; object-fit: cover; object-position: 50% 35%;
     -webkit-mask-image: linear-gradient(to bottom, #000 50%, transparent 99%); mask-image: linear-gradient(to bottom, #000 50%, transparent 99%);
   }
-  .bio-marca { position: absolute; left: max(20px, env(safe-area-inset-left, 0px)); bottom: 14px; width: min(250px, 66%); margin: 0; }
+  .bio-marca { position: absolute; left: 0; right: 0; bottom: 16px; width: min(270px, 72%); margin: 0 auto; }
   .bio-media picture { display: contents; }
   .bio-media::after, .bio-media::before { content: ""; position: absolute; pointer-events: none; -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); }
   .bio-media::after { left: 0; right: 0; bottom: 0; height: 42%; -webkit-mask-image: linear-gradient(to top, #000 35%, transparent); mask-image: linear-gradient(to top, #000 35%, transparent); }
@@ -210,7 +210,7 @@
       mask-image: linear-gradient(to left, transparent 0, #000 32%), linear-gradient(to bottom, #000 60%, transparent 99%);
       mask-composite: intersect;
     }
-    .bio-marca { left: 48px; bottom: 44px; width: 300px; }
+    .bio-marca { bottom: 48px; width: 360px; }
     .bio-media::before { top: 0; bottom: 0; right: 0; width: 38%; -webkit-mask-image: linear-gradient(to left, #000 30%, transparent); mask-image: linear-gradient(to left, #000 30%, transparent); }
     .bio-media::after { height: 34%; }
     .bio-main { max-width: 520px; padding-block: 0 56px; }
@@ -283,7 +283,7 @@
       <img src="assets/ka-topo-celular.webp" alt="A Ka sorrindo com um brigadeiro na mão, de turbante rosa e avental." width="900" height="900" fetchpriority="high">
     </picture>
     <span class="previa" hidden>Prévia</span>
-    <p class="bio-marca"><img src="assets/wordmark-480.png" srcset="assets/wordmark-480.png 480w, assets/wordmark-600.png 600w" sizes="(min-width: 1024px) 300px, 250px" alt="Doçuras.Ka · Doceria artesanal" width="480" height="138"></p>
+    <p class="bio-marca"><img src="assets/logo-560.png" srcset="assets/logo-560.png 560w, assets/logo-760.png 760w" sizes="(min-width: 1024px) 360px, 270px" alt="Doçuras.Ka · Doceria artesanal" width="560" height="163"></p>
   </header>
 
   <main class="bio-main">
