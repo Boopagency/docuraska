@@ -18,21 +18,22 @@ python3 -m http.server 8000
 
 Depois abra http://localhost:8000.
 
-## Antes de publicar
+## Configuração
 
 No começo do `<script>` do `index.html`:
 
-| Constante | O que colocar |
-| --- | --- |
-| `PREVIA` | `false` (tira o selo "Prévia" e faz o formulário abrir o WhatsApp) |
-| `WHATSAPP` | número da Ka, com 55 e DDD, só dígitos |
-| `CARDAPIO_URL` | link do cardápio (PDF ou imagem; pode ficar em `assets/`) |
-| `LEADS_URL` | opcional: para onde mandar os contatos (planilha ou Comercial do Boop Admin) |
+| Constante | Hoje | O que é |
+| --- | --- | --- |
+| `PREVIA` | `false` | `true` mostra o selo "Prévia" e o envio só exibe a mensagem, sem abrir o WhatsApp |
+| `WHATSAPP` | `5541992285860` | número da Ka: (41) 99228-5860 |
+| `CARDAPIO_URL` | vazio | link do cardápio (PDF ou imagem). Vazio, o botão abre o WhatsApp pedindo o cardápio |
+| `LEADS_URL` | vazio | opcional: para onde mandar os contatos (planilha ou Comercial do Boop Admin) |
 
-Também falta:
+Ainda falta:
 
-- Fotos originais em alta resolução (as atuais têm uns 500 px de largura). Ao trocar uma foto, use um nome novo de arquivo (veja Desempenho).
+- O arquivo do cardápio.
 - Confirmar com a Ka o nome para o bloco "Quem faz" e se ela faz entrega.
+- Fotos de produto em alta resolução (as da vitrine têm uns 500 px). Ao trocar uma foto, use um nome novo de arquivo (veja Desempenho).
 
 ## Arquivos
 

@@ -11,7 +11,8 @@
 <meta property="og:description" content="Doces finos, brigadeiros e bolos feitos à mão. Faça seu pedido ou peça um orçamento.">
 <link rel="icon" href="assets/favicon.png" type="image/png">
 <link rel="preload" href="assets/fonts/bricolage.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="assets/hero.webp" as="image" fetchpriority="high">
+<link rel="preload" as="image" href="assets/ka-topo-celular.webp" media="(max-width: 1023px)" fetchpriority="high">
+<link rel="preload" as="image" href="assets/ka-topo-1254.webp" media="(min-width: 1024px)" fetchpriority="high">
 <style>
 @font-face {
   font-family: 'Bricolage Grotesque';
@@ -69,11 +70,12 @@
 
   /* foto ---------------------------------------------------------------- */
   .bio-media { position: relative; height: min(48svh, 540px); min-height: 320px; overflow: hidden; background: var(--rosa); }
-  .bio-media > img {
+  .bio-media picture img {
     width: 100%; height: 100%; object-fit: cover; object-position: 50% 35%;
     -webkit-mask-image: linear-gradient(to bottom, #000 40%, rgba(0,0,0,.25) 80%, transparent 96%); mask-image: linear-gradient(to bottom, #000 40%, rgba(0,0,0,.25) 80%, transparent 96%);
   }
   .bio-marca { position: absolute; left: max(20px, env(safe-area-inset-left, 0px)); bottom: 14px; width: min(250px, 66%); margin: 0; }
+  .bio-media picture { display: contents; }
   .bio-marca img { width: 100%; height: auto; }
   .previa {
     position: absolute; top: 14px; left: max(14px, env(safe-area-inset-left, 0px)); padding: 7px 12px; border-radius: var(--pilula);
@@ -200,7 +202,7 @@
   @media (min-width: 1024px) {
     .bio { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); min-height: 100svh; }
     .bio-media { position: sticky; top: 0; height: 100svh; max-height: none; }
-    .bio-media > img {
+    .bio-media picture img {
       -webkit-mask-image: linear-gradient(to bottom, #000 50%, rgba(0,0,0,.25) 82%, transparent 97%); mask-image: linear-gradient(to bottom, #000 50%, rgba(0,0,0,.25) 82%, transparent 97%);
     }
     .bio-marca { left: 48px; bottom: 44px; width: 300px; }
@@ -210,7 +212,7 @@
   /* movimento ------------------------------------------------------------
      Entrada: a foto "respira", o nome se escreve, o selo pula e a conversa sobe em sequência.
      A foto e o título nunca começam invisíveis (é o que o PageSpeed mede como carregado). */
-  .bio-media > img { animation: respira 1.6s var(--ease-entrada) backwards; }
+  .bio-media picture img { animation: respira 1.6s var(--ease-entrada) backwards; }
   .bio-marca img { animation: escreve 1.1s var(--ease-entrada) .25s backwards; }
   .bio-topo { animation: sobe-leve .7s var(--ease-entrada) .05s backwards; }
   h1 { animation: desliza .8s var(--ease-entrada) .1s backwards; }
@@ -257,7 +259,10 @@
 <body>
 <div class="bio">
   <header class="bio-media">
-    <img src="assets/hero.webp" alt="Bandeja de doces da Ka: morangos e cerejas em copinhos de chocolate e corações de maracujá." width="512" height="774" fetchpriority="high">
+    <picture>
+      <source media="(min-width: 1024px)" srcset="assets/ka-topo-1254.webp" width="1254" height="1254">
+      <img src="assets/ka-topo-celular.webp" alt="A Ka sorrindo com um brigadeiro na mão, de turbante rosa e avental." width="900" height="900" fetchpriority="high">
+    </picture>
     <span class="previa" hidden>Prévia</span>
     <p class="bio-marca"><img src="assets/wordmark-480.png" srcset="assets/wordmark-480.png 480w, assets/wordmark-600.png 600w" sizes="(min-width: 1024px) 300px, 250px" alt="Doçuras.Ka · Doceria artesanal" width="480" height="138"></p>
   </header>
@@ -303,6 +308,7 @@
         </div>
       </div>
       <div class="vitrine" role="region" tabindex="0" aria-label="Fotos dos doces">
+        <figure><img src="assets/bandeja.webp" alt="Bandeja de morangos e cerejas em copinhos de chocolate e corações de maracujá." width="440" height="550" loading="lazy" decoding="async"><figcaption>Morangos e cerejas</figcaption></figure>
         <figure><img src="assets/doces-finos.webp" alt="Bandeja de doces finos com morango, coco e chocolate." width="440" height="550" loading="lazy" decoding="async"><figcaption>Doces finos</figcaption></figure>
         <figure><img src="assets/bolo.webp" alt="Bolo em camadas de chocolate e creme, coberto de morangos e brigadeiros." width="440" height="550" loading="lazy" decoding="async"><figcaption>Bolos</figcaption></figure>
         <figure><img src="assets/ig1.webp" alt="Morango cravejado mordido, com o morango aparecendo." width="270" height="338" loading="lazy" decoding="async" style="object-position: 50% 30%"><figcaption>Morango cravejado</figcaption></figure>
@@ -421,17 +427,17 @@
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="whats" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></symbol></svg>
 
 <script>
-  // Configuração (ver README). Enquanto PREVIA for true, aparece o selo "Prévia" e o envio mostra a
-  // mensagem em vez de abrir o WhatsApp: o número abaixo ainda é de exemplo.
+  // Configuração (ver README). Com PREVIA = true aparece o selo "Prévia" e o envio só mostra a mensagem.
   // ponytail: LEADS_URL vazio = os contatos não ficam guardados; apontar para a planilha ou o Comercial do Boop Admin.
-  const PREVIA = true;
-  const WHATSAPP = "5541900000000";
+  const PREVIA = false;
+  const WHATSAPP = "5541992285860"; // (41) 99228-5860
   const CARDAPIO_URL = "";
   const LEADS_URL = "";
 
   const $ = (sel, el = document) => el.querySelector(sel);
   const $$ = (sel, el = document) => [...el.querySelectorAll(sel)];
   const calmo = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const whats = texto => `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(texto)}`;
 
   // Fecha com a janela descendo; quem pediu menos movimento, fecha na hora.
   function fechar(d) {
@@ -452,6 +458,7 @@
   // Cardápio: abre direto, sem formulário.
   $$("[data-cardapio]").forEach(a => {
     if (CARDAPIO_URL) { a.href = CARDAPIO_URL; a.target = "_blank"; a.rel = "noopener noreferrer"; return; }
+    if (!PREVIA) { a.href = whats("Oi, Ka! Vim pelo link da bio e quero ver o cardápio."); return; }
     a.addEventListener("click", e => { e.preventDefault(); $("#cardapio-previa").showModal(); });
   });
 
@@ -500,7 +507,7 @@
       await fetch(LEADS_URL, { method: "POST", keepalive: true, headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ nome, whatsapp: fone, tipo: form.closest("dialog").id, mensagem: texto, origem: location.search }) }).catch(() => {});
     }
-    if (!PREVIA) { location.href = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(texto)}`; return; }
+    if (!PREVIA) { location.href = whats(texto); return; }
     form.closest("dialog").close();
     $("#enviado .msg").textContent = texto;
     $("#enviado").showModal();
