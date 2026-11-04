@@ -40,7 +40,7 @@
   :root {
     --branco: #FFFFFF;     /* plano da conversa */
     --rosa-claro: #FFF1F7; /* superfícies e toque */
-    --rosa: #EFA3C8;       /* o rosa da logo: botão principal, destaque, faixa */
+    --rosa: #EFA3C8;       /* o rosa da logo: botão principal e destaques */
     --rosa-forte: #C2457F; /* rosa para texto pequeno (4,7:1 sobre o branco) */
     --tinta: #3A0F24;      /* texto: quase preto puxado para o rosa (16:1 no branco, 8:1 no rosa) */
     --tinta-2: #7A4560;    /* texto de apoio (7:1) */
@@ -121,17 +121,14 @@
   .seta svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
   .nota { margin: 14px 0 0; font-size: 13px; color: var(--tinta-2); text-align: center; }
 
-  section { margin-top: 56px; }
+  section { margin-top: 64px; }
   section > .rotulo { margin-bottom: 16px; }
 
-  /* "como funciona" numa faixa rosa de ponta a ponta */
-  .faixa { padding: 28px 22px 10px; border-radius: var(--raio); background: var(--rosa); }
-  .faixa > .rotulo { color: var(--tinta); }
-  .passos { list-style: none; margin: 0; padding: 0; counter-reset: p; }
-  .passos li { counter-increment: p; display: grid; grid-template-columns: 44px 1fr; gap: 4px 12px; padding: 16px 0; border-top: 1px solid rgba(58, 15, 36, .16); }
-  .passos li::before { content: "0" counter(p); grid-row: span 2; font-size: 22px; line-height: 1.1; font-weight: 700; font-stretch: 82%; color: var(--tinta); font-variant-numeric: tabular-nums; }
+  .passos { list-style: none; margin: 0; padding: 0; counter-reset: p; border-bottom: 1px solid var(--traco); }
+  .passos li { counter-increment: p; display: grid; grid-template-columns: 44px 1fr; gap: 4px 12px; padding: 16px 0; border-top: 1px solid var(--traco); }
+  .passos li::before { content: "0" counter(p); grid-row: span 2; font-size: 22px; line-height: 1.1; font-weight: 700; font-stretch: 82%; color: var(--rosa-forte); font-variant-numeric: tabular-nums; }
   .passos strong { font-size: 17px; line-height: 1.3; font-weight: 600; }
-  .passos span { font-size: 15px; color: var(--tinta); opacity: .82; }
+  .passos span { font-size: 15px; color: var(--tinta-2); }
 
   .vitrine { display: flex; gap: 10px; margin: 0 calc(-1 * max(20px, env(safe-area-inset-right, 0px))) 0 0; padding-right: 20px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
   .vitrine::-webkit-scrollbar { display: none; }
@@ -214,7 +211,8 @@
     .bio-marca { left: 48px; bottom: 44px; width: 300px; }
     .bio-media::before { top: 0; bottom: 0; right: 0; width: 38%; -webkit-mask-image: linear-gradient(to left, #000 30%, transparent); mask-image: linear-gradient(to left, #000 30%, transparent); }
     .bio-media::after { height: 34%; }
-    .bio-main { max-width: 520px; padding-block: 72px 48px; }
+    .bio-main { max-width: 520px; padding-block: 0 56px; }
+    .bio-intro { min-height: 100svh; display: flex; flex-direction: column; justify-content: center; padding-block: 56px; }
     .vitrine { margin-right: 0; padding-right: 0; }
   }
   /* movimento ------------------------------------------------------------
@@ -276,6 +274,7 @@
   </header>
 
   <main class="bio-main">
+    <div class="bio-intro">
     <div class="bio-topo">
       <span>Sob encomenda · São José dos Pinhais</span>
     </div>
@@ -297,15 +296,8 @@
       </a>
     </nav>
     <p class="nota">Leva um minuto. Depois a conversa segue no WhatsApp com a Ka.</p>
+    </div>
 
-    <section class="faixa revela" aria-labelledby="como">
-      <p class="rotulo" id="como">Como funciona</p>
-      <ol class="passos">
-        <li><strong>Você escolhe o caminho</strong><span>Pedido, se já sabe o que quer. Orçamento, para festa e evento.</span></li>
-        <li><strong>Conta os detalhes</strong><span>Data, quantidade e ocasião, em menos de um minuto.</span></li>
-        <li><strong>A Ka responde no WhatsApp</strong><span>Com valores, prazo e como você recebe.</span></li>
-      </ol>
-    </section>
 
     <section class="revela" aria-labelledby="cozinha">
       <div class="cozinha-topo">
@@ -323,6 +315,15 @@
         <figure><img src="assets/ig3.webp" alt="Copo da felicidade com camadas de brigadeiro e uvas." width="270" height="338" loading="lazy" decoding="async"><figcaption>Copo da felicidade</figcaption></figure>
       </div>
       <a class="link-seta" href="https://www.instagram.com/docuras.ka/" target="_blank" rel="noopener noreferrer">Ver mais no @docuras.ka <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+    </section>
+
+    <section class="revela" aria-labelledby="como">
+      <p class="rotulo" id="como">Como funciona</p>
+      <ol class="passos">
+        <li><strong>Você escolhe o caminho</strong><span>Pedido, se já sabe o que quer. Orçamento, para festa e evento.</span></li>
+        <li><strong>Conta os detalhes</strong><span>Data, quantidade e ocasião, em menos de um minuto.</span></li>
+        <li><strong>A Ka responde no WhatsApp</strong><span>Com valores, prazo e como você recebe.</span></li>
+      </ol>
     </section>
 
     <section class="revela" aria-labelledby="quem">
