@@ -69,13 +69,16 @@
   .rotulo { margin: 0; font-size: 12px; line-height: 1.2; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--rosa-forte); }
 
   /* foto ---------------------------------------------------------------- */
-  .bio-media { position: relative; height: min(48svh, 540px); min-height: 320px; overflow: hidden; background: var(--rosa); }
+  .bio-media { position: relative; height: min(48svh, 540px); min-height: 320px; overflow: hidden; background: var(--branco); }
   .bio-media picture img {
     width: 100%; height: 100%; object-fit: cover; object-position: 50% 35%;
-    -webkit-mask-image: linear-gradient(to bottom, #000 40%, rgba(0,0,0,.25) 80%, transparent 96%); mask-image: linear-gradient(to bottom, #000 40%, rgba(0,0,0,.25) 80%, transparent 96%);
+    -webkit-mask-image: linear-gradient(to bottom, #000 50%, transparent 99%); mask-image: linear-gradient(to bottom, #000 50%, transparent 99%);
   }
   .bio-marca { position: absolute; left: max(20px, env(safe-area-inset-left, 0px)); bottom: 14px; width: min(250px, 66%); margin: 0; }
   .bio-media picture { display: contents; }
+  .bio-media::after, .bio-media::before { content: ""; position: absolute; pointer-events: none; -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); }
+  .bio-media::after { left: 0; right: 0; bottom: 0; height: 42%; -webkit-mask-image: linear-gradient(to top, #000 35%, transparent); mask-image: linear-gradient(to top, #000 35%, transparent); }
+  .bio-marca, .previa { z-index: 2; }
   .bio-marca img { width: 100%; height: auto; }
   .previa {
     position: absolute; top: 14px; left: max(14px, env(safe-area-inset-left, 0px)); padding: 7px 12px; border-radius: var(--pilula);
@@ -203,9 +206,14 @@
     .bio { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); min-height: 100svh; }
     .bio-media { position: sticky; top: 0; height: 100svh; max-height: none; }
     .bio-media picture img {
-      -webkit-mask-image: linear-gradient(to bottom, #000 50%, rgba(0,0,0,.25) 82%, transparent 97%); mask-image: linear-gradient(to bottom, #000 50%, rgba(0,0,0,.25) 82%, transparent 97%);
+      -webkit-mask-image: linear-gradient(to left, transparent 0, #000 32%), linear-gradient(to bottom, #000 60%, transparent 99%);
+      -webkit-mask-composite: source-in;
+      mask-image: linear-gradient(to left, transparent 0, #000 32%), linear-gradient(to bottom, #000 60%, transparent 99%);
+      mask-composite: intersect;
     }
     .bio-marca { left: 48px; bottom: 44px; width: 300px; }
+    .bio-media::before { top: 0; bottom: 0; right: 0; width: 38%; -webkit-mask-image: linear-gradient(to left, #000 30%, transparent); mask-image: linear-gradient(to left, #000 30%, transparent); }
+    .bio-media::after { height: 34%; }
     .bio-main { max-width: 520px; padding-block: 72px 48px; }
     .vitrine { margin-right: 0; padding-right: 0; }
   }
