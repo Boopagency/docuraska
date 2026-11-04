@@ -31,10 +31,19 @@ No começo do `<script>` do `index.html`:
 
 Também falta:
 
-- Fotos originais em alta resolução, com o mesmo nome em `assets/` (as atuais têm uns 500 px de largura).
+- Fotos originais em alta resolução (as atuais têm uns 500 px de largura). Ao trocar uma foto, use um nome novo de arquivo (veja Desempenho).
 - Confirmar com a Ka o nome para o bloco "Quem faz" e se ela faz entrega.
 
 ## Arquivos
 
 - `index.html`: a página inteira, com estilo e script.
 - `assets/`: fotos, logo, abelha, favicon e a fonte Bricolage Grotesque (servida pelo próprio site).
+- `vercel.json`: cache longo para `assets/`.
+
+## Desempenho
+
+- Imagens em WebP (o nome da marca em PNG de 16 cores), no tamanho em que aparecem.
+- Fonte reduzida aos caracteres do português e sem o eixo de tamanho ótico: 57 KB.
+- A foto do topo e o título aparecem na hora; o movimento fica nos detalhes e respeita quem pediu menos movimento no aparelho.
+- `vercel.json` guarda `assets/` em cache por um ano. Ao trocar uma foto, salve com outro nome (ex.: `hero-2.webp`) e atualize o `index.html`; com o mesmo nome, quem já visitou continua vendo a antiga.
+- Lighthouse no celular (local): desempenho 99, acessibilidade 100, boas práticas 100, SEO 100.

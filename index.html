@@ -3,14 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script>document.documentElement.className = "js";</script>
 <title>Doçuras.Ka · Doces finos, brigadeiros e bolos</title>
 <meta name="description" content="Doces finos, brigadeiros e bolos feitos à mão em São José dos Pinhais – PR. Faça seu pedido ou peça um orçamento pelo WhatsApp.">
 <meta name="theme-color" content="#EFA3C8">
 <meta property="og:title" content="Doçuras.Ka · Doceria artesanal">
 <meta property="og:description" content="Doces finos, brigadeiros e bolos feitos à mão. Faça seu pedido ou peça um orçamento.">
 <link rel="icon" href="assets/favicon.png" type="image/png">
-<link rel="preload" href="assets/fonts/bricolage-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="assets/hero.jpg" as="image">
+<link rel="preload" href="assets/fonts/bricolage.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/hero.webp" as="image" fetchpriority="high">
 <style>
 @font-face {
   font-family: 'Bricolage Grotesque';
@@ -24,11 +25,11 @@
 @font-face {
   font-family: 'Bricolage Grotesque';
   font-style: normal;
-  font-weight: 300 800;
-  font-stretch: 75% 100%;
+  font-weight: 400 700;
+  font-stretch: 82% 100%;
   font-display: swap;
-  src: url(assets/fonts/bricolage-latin.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  src: url(assets/fonts/bricolage.woff2) format('woff2');
+  unicode-range: U+0020-007E, U+00A0-00FF, U+2013-2014, U+2018-2019, U+201C-201D, U+2022, U+2026, U+20AC;
 }
   [hidden] { display: none !important; }
   /* Doçuras.Ka · link na bio
@@ -47,6 +48,12 @@
     --balao: #D9FDD3;      /* balão de mensagem enviada no WhatsApp */
     --fonte: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
     --pilula: 999px;
+    --raio: 20px;          /* cartões e fotos */
+    --raio-campo: 14px;    /* campos dos formulários */
+    --ease-padrao: cubic-bezier(.2, .8, .2, 1);
+    --ease-entrada: cubic-bezier(.16, 1, .3, 1);   /* expo.out */
+    --ease-saida: cubic-bezier(.7, 0, .84, 0);     /* expo.in */
+    --ease-faisca: cubic-bezier(.34, 1.56, .64, 1); /* leve passada, só em detalhe */
     color-scheme: light;
   }
   *, *::before, *::after { box-sizing: border-box; }
@@ -113,10 +120,7 @@
   section > .rotulo { margin-bottom: 16px; }
 
   /* "como funciona" numa faixa rosa de ponta a ponta */
-  .faixa {
-    margin-left: calc(-1 * max(20px, env(safe-area-inset-left, 0px))); margin-right: calc(-1 * max(20px, env(safe-area-inset-right, 0px)));
-    padding: 32px max(20px, env(safe-area-inset-right, 0px)) 12px max(20px, env(safe-area-inset-left, 0px)); background: var(--rosa);
-  }
+  .faixa { padding: 28px 22px 10px; border-radius: var(--raio); background: var(--rosa); }
   .faixa > .rotulo { color: var(--tinta); }
   .passos { list-style: none; margin: 0; padding: 0; counter-reset: p; }
   .passos li { counter-increment: p; display: grid; grid-template-columns: 44px 1fr; gap: 4px 12px; padding: 16px 0; border-top: 1px solid rgba(58, 15, 36, .16); }
@@ -126,14 +130,19 @@
 
   .vitrine { display: flex; gap: 10px; margin: 0 calc(-1 * max(20px, env(safe-area-inset-right, 0px))) 0 0; padding-right: 20px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
   .vitrine::-webkit-scrollbar { display: none; }
+  .cozinha-topo { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 14px; }
+  .setas { display: flex; gap: 8px; }
+  .setas .seta { width: 44px; height: 44px; border: 0; cursor: pointer; transition: background-color .24s var(--ease-padrao), transform .12s; }
+  .setas .seta:hover { background: var(--rosa); }
+  .setas .seta:active { transform: scale(.92); }
   .vitrine figure { flex: 0 0 min(58%, 220px); margin: 0; scroll-snap-align: start; }
-  .vitrine img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+  .vitrine img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 18px; }
   .vitrine figcaption { margin-top: 8px; font-size: 14px; font-weight: 500; }
   .link-seta { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; margin-top: 8px; font-size: 15px; font-weight: 600; color: var(--rosa-forte); text-decoration: none; }
   .link-seta svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; }
 
-  .quem { display: grid; grid-template-columns: 112px 1fr; gap: 18px; align-items: center; padding: 18px; background: var(--rosa-claro); }
-  .quem img { width: 112px; aspect-ratio: 4 / 5; object-fit: cover; object-position: 30% 10%; }
+  .quem { display: grid; grid-template-columns: 112px 1fr; gap: 18px; align-items: center; padding: 18px; border-radius: var(--raio); background: var(--rosa-claro); }
+  .quem img { width: 112px; aspect-ratio: 4 / 5; object-fit: cover; object-position: 30% 10%; border-radius: 14px; }
   .quem blockquote { margin: 0; min-width: 0; }
   .quem p { margin: 0; font-size: 20px; line-height: 1.25; font-weight: 600; font-stretch: 88%; letter-spacing: -.01em; }
   .quem footer { margin-top: 10px; font-size: 14px; color: var(--tinta-2); }
@@ -145,7 +154,7 @@
   /* formulários --------------------------------------------------------- */
   .janela {
     width: 100%; max-width: 100%; max-height: 92svh; margin: auto 0 0; padding: 0; overflow: auto;
-    border: 0; border-top: 4px solid var(--rosa); background: var(--branco); color: var(--tinta);
+    border: 0; border-top: 4px solid var(--rosa); border-radius: 28px 28px 0 0; background: var(--branco); color: var(--tinta);
   }
   .janela::backdrop { background: rgba(58, 15, 36, .5); }
   .janela form, .janela .corpo {
@@ -161,7 +170,7 @@
   .campo { display: flex; flex-direction: column; gap: 8px; font-size: 14px; font-weight: 500; color: var(--tinta-2); }
   .campo small, .grupo small { font-size: inherit; font-weight: 400; opacity: .8; }
   .campo input, .campo textarea {
-    width: 100%; min-height: 52px; padding: 13px 14px; border: 1px solid var(--traco-forte); border-radius: 0;
+    width: 100%; min-height: 52px; padding: 13px 14px; border: 1px solid var(--traco-forte); border-radius: var(--raio-campo);
     background: var(--branco); color: var(--tinta); font-size: 16px; line-height: 1.4; -webkit-appearance: none; appearance: none;
   }
   .campo textarea { min-height: 88px; resize: vertical; }
@@ -181,7 +190,7 @@
   .enviar { justify-content: center; gap: 10px; padding: 0 24px; font-size: 17px; font-weight: 600; }
   .enviar svg { width: 22px; height: 22px; fill: currentColor; }
   .legal { margin: -6px 0 0; font-size: 12px; text-align: center; color: var(--tinta-2); }
-  .msg { margin: 0; padding: 14px 16px; background: var(--balao); color: #111B21; font-size: 16px; line-height: 1.45; white-space: pre-line; }
+  .msg { margin: 0; padding: 14px 16px; border-radius: 18px 4px 18px 18px; background: var(--balao); color: #111B21; font-size: 16px; line-height: 1.45; white-space: pre-line; }
 
   @media (min-width: 640px) {
     .janela { width: min(560px, calc(100% - 48px)); margin: auto; border: 1px solid var(--traco); border-top: 4px solid var(--rosa); }
@@ -197,17 +206,60 @@
     .bio-marca { left: 48px; bottom: 44px; width: 300px; }
     .bio-main { max-width: 520px; padding-block: 72px 48px; }
     .vitrine { margin-right: 0; padding-right: 0; }
-    .faixa { margin-left: 0; margin-right: 0; padding-left: 24px; padding-right: 24px; }
   }
-  @media (prefers-reduced-motion: reduce) { .cta { transition: none; } .cta:active { transform: none; } }
+  /* movimento ------------------------------------------------------------
+     Entrada: a foto "respira", o nome se escreve, o selo pula e a conversa sobe em sequência.
+     A foto e o título nunca começam invisíveis (é o que o PageSpeed mede como carregado). */
+  .bio-media > img { animation: respira 1.6s var(--ease-entrada) backwards; }
+  .bio-marca img { animation: escreve 1.1s var(--ease-entrada) .25s backwards; }
+  .bio-topo { animation: sobe-leve .7s var(--ease-entrada) .05s backwards; }
+  h1 { animation: desliza .8s var(--ease-entrada) .1s backwards; }
+  h1 em { animation: selo .7s var(--ease-faisca) .5s backwards; }
+  h1 em img { animation: voa 3.2s ease-in-out 1.4s infinite; }
+  .acoes > * { animation: sobe-leve .7s var(--ease-entrada) backwards; }
+  .acoes > :nth-child(1) { animation-delay: .2s; }
+  .acoes > :nth-child(2) { animation-delay: .27s; }
+  .acoes > :nth-child(3) { animation-delay: .34s; }
+  .nota { animation: sobe-leve .7s var(--ease-entrada) .42s backwards; }
+  .seta svg { transition: transform .24s var(--ease-padrao); }
+  .cta:hover .seta svg { transform: translateX(3px); }
+  .cta[data-cardapio]:hover .seta svg { transform: translate(2px, -2px); }
+  .grupo span { transition: background-color .2s, border-color .2s; }
+  .grupo input:checked + span { animation: marca .35s var(--ease-faisca); }
+  .js .revela { opacity: 0; transform: translateY(22px); transition: opacity .8s var(--ease-entrada), transform .8s var(--ease-entrada); }
+  .js .revela.dentro { opacity: 1; transform: none; }
+  .janela[open] { animation: sobe .55s var(--ease-entrada); }
+  .janela[open]::backdrop { animation: esmaece .4s ease; }
+  .janela.saindo { animation: desce .3s var(--ease-saida) forwards; }
+  .janela.saindo::backdrop { animation: esmaece .3s ease reverse forwards; }
+  @media (min-width: 640px) {
+    .janela[open] { animation: aparece .45s var(--ease-entrada); }
+    .janela.saindo { animation: some .25s var(--ease-saida) forwards; }
+  }
+  @keyframes respira { from { transform: scale(1.08); } }
+  @keyframes escreve { from { clip-path: inset(-20% 100% -20% 0); } to { clip-path: inset(-20% 0 -20% 0); } }
+  @keyframes sobe-leve { from { opacity: 0; transform: translateY(14px); } }
+  @keyframes desliza { from { transform: translateY(14px); } }
+  @keyframes selo { from { opacity: 0; transform: rotate(-10deg) scale(.6); } }
+  @keyframes voa { 0%, 100% { transform: translateY(-.02em) rotate(0); } 50% { transform: translateY(-.12em) rotate(-8deg); } }
+  @keyframes marca { from { transform: scale(.9); } }
+  @keyframes sobe { from { transform: translateY(100%); } }
+  @keyframes desce { to { transform: translateY(100%); } }
+  @keyframes aparece { from { opacity: 0; transform: translateY(16px) scale(.98); } }
+  @keyframes some { to { opacity: 0; transform: translateY(10px) scale(.98); } }
+  @keyframes esmaece { from { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+    .js .revela { opacity: 1; transform: none; }
+  }
 </style>
 </head>
 <body>
 <div class="bio">
   <header class="bio-media">
-    <img src="assets/hero.jpg" alt="Bandeja de doces da Ka: morangos e cerejas em copinhos de chocolate e corações de maracujá." width="512" height="774">
+    <img src="assets/hero.webp" alt="Bandeja de doces da Ka: morangos e cerejas em copinhos de chocolate e corações de maracujá." width="512" height="774" fetchpriority="high">
     <span class="previa" hidden>Prévia</span>
-    <p class="bio-marca"><img src="assets/wordmark.png" alt="Doçuras.Ka · Doceria artesanal" width="710" height="205"></p>
+    <p class="bio-marca"><img src="assets/wordmark-480.png" srcset="assets/wordmark-480.png 480w, assets/wordmark-600.png 600w" sizes="(min-width: 1024px) 300px, 250px" alt="Doçuras.Ka · Doceria artesanal" width="480" height="138"></p>
   </header>
 
   <main class="bio-main">
@@ -215,7 +267,7 @@
       <span>Sob encomenda · São José dos Pinhais</span>
     </div>
 
-    <h1>Doces finos, brigadeiros e bolos <em>feitos à mão<img src="assets/abelha.png" alt="" width="225" height="250"></em></h1>
+    <h1>Doces finos, brigadeiros e bolos <em>feitos à mão<img src="assets/abelha.webp" alt="" width="86" height="96"></em></h1>
 
     <nav class="acoes" aria-label="O que você quer fazer">
       <button type="button" class="cta cta--cheio" data-abre="pedido">
@@ -233,7 +285,7 @@
     </nav>
     <p class="nota">Leva um minuto. Depois a conversa segue no WhatsApp com a Ka.</p>
 
-    <section class="faixa" aria-labelledby="como">
+    <section class="faixa revela" aria-labelledby="como">
       <p class="rotulo" id="como">Como funciona</p>
       <ol class="passos">
         <li><strong>Você escolhe o caminho</strong><span>Pedido, se já sabe o que quer. Orçamento, para festa e evento.</span></li>
@@ -242,21 +294,27 @@
       </ol>
     </section>
 
-    <section aria-labelledby="cozinha">
-      <p class="rotulo" id="cozinha">Da cozinha da Ka</p>
-      <div class="vitrine">
-        <figure><img src="assets/doces-finos.jpg" alt="Bandeja de doces finos com morango, coco e chocolate." loading="lazy"><figcaption>Doces finos</figcaption></figure>
-        <figure><img src="assets/bolo.jpg" alt="Bolo em camadas de chocolate e creme, coberto de morangos e brigadeiros." loading="lazy"><figcaption>Bolos</figcaption></figure>
-        <figure><img src="assets/ig1.jpg" alt="Morango cravejado mordido, com o morango aparecendo." loading="lazy" style="object-position: 50% 30%"><figcaption>Morango cravejado</figcaption></figure>
-        <figure><img src="assets/ig3.jpg" alt="Copo da felicidade com camadas de brigadeiro e uvas." loading="lazy"><figcaption>Copo da felicidade</figcaption></figure>
+    <section class="revela" aria-labelledby="cozinha">
+      <div class="cozinha-topo">
+        <p class="rotulo" id="cozinha">Da cozinha da Ka</p>
+        <div class="setas">
+          <button type="button" class="seta" data-vitrine="-1" aria-label="Foto anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
+          <button type="button" class="seta" data-vitrine="1" aria-label="Próxima foto"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        </div>
+      </div>
+      <div class="vitrine" role="region" tabindex="0" aria-label="Fotos dos doces">
+        <figure><img src="assets/doces-finos.webp" alt="Bandeja de doces finos com morango, coco e chocolate." width="440" height="550" loading="lazy" decoding="async"><figcaption>Doces finos</figcaption></figure>
+        <figure><img src="assets/bolo.webp" alt="Bolo em camadas de chocolate e creme, coberto de morangos e brigadeiros." width="440" height="550" loading="lazy" decoding="async"><figcaption>Bolos</figcaption></figure>
+        <figure><img src="assets/ig1.webp" alt="Morango cravejado mordido, com o morango aparecendo." width="270" height="338" loading="lazy" decoding="async" style="object-position: 50% 30%"><figcaption>Morango cravejado</figcaption></figure>
+        <figure><img src="assets/ig3.webp" alt="Copo da felicidade com camadas de brigadeiro e uvas." width="270" height="338" loading="lazy" decoding="async"><figcaption>Copo da felicidade</figcaption></figure>
       </div>
       <a class="link-seta" href="https://www.instagram.com/docuras.ka/" target="_blank" rel="noopener noreferrer">Ver mais no @docuras.ka <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
     </section>
 
-    <section aria-labelledby="quem">
+    <section class="revela" aria-labelledby="quem">
       <p class="rotulo" id="quem">Quem faz</p>
       <div class="quem">
-        <img src="assets/ka-rua.jpg" alt="A Ka sorrindo, com o uniforme da Doçuras.Ka." loading="lazy">
+        <img src="assets/ka-rua.webp" alt="A Ka sorrindo, com o uniforme da Doçuras.Ka." width="240" height="300" loading="lazy" decoding="async">
         <blockquote>
           <p>“Todos os brigadeiros sou eu que faço. Então são todos artesanais.”</p>
           <footer>Ka, da Doçuras.Ka</footer>
@@ -264,7 +322,7 @@
       </div>
     </section>
 
-    <footer class="rodape">
+    <footer class="rodape revela">
       <a href="https://www.instagram.com/docuras.ka/" target="_blank" rel="noopener noreferrer">@docuras.ka</a>
       <a href="#cardapio" data-cardapio>Cardápio</a>
       <span>São José dos Pinhais · PR</span>
@@ -373,10 +431,23 @@
 
   const $ = (sel, el = document) => el.querySelector(sel);
   const $$ = (sel, el = document) => [...el.querySelectorAll(sel)];
+  const calmo = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Fecha com a janela descendo; quem pediu menos movimento, fecha na hora.
+  function fechar(d) {
+    if (calmo || !d.open) return d.close();
+    d.classList.add("saindo");
+    d.addEventListener("animationend", function fim(e) {
+      if (e.target !== d) return;
+      d.removeEventListener("animationend", fim);
+      d.classList.remove("saindo");
+      d.close();
+    });
+  }
 
   $(".previa").hidden = !PREVIA;
-  $$(".fechar").forEach(b => b.addEventListener("click", () => b.closest("dialog").close()));
-  $$("dialog").forEach(d => d.addEventListener("click", e => { if (e.target === d) d.close(); }));
+  $$(".fechar").forEach(b => b.addEventListener("click", () => fechar(b.closest("dialog"))));
+  $$("dialog").forEach(d => d.addEventListener("click", e => { if (e.target === d) fechar(d); }));
 
   // Cardápio: abre direto, sem formulário.
   $$("[data-cardapio]").forEach(a => {
@@ -434,6 +505,31 @@
     $("#enviado .msg").textContent = texto;
     $("#enviado").showModal();
   }));
+
+  // Revelação ao rolar: cada bloco sobe uma vez, quando entra na tela.
+  const io = new IntersectionObserver(entradas => entradas.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add("dentro"); io.unobserve(e.target); }
+  }), { rootMargin: "0px 0px -8% 0px" });
+  $$(".revela").forEach(el => io.observe(el));
+
+  // Vitrine: setas, arrastar no celular e passa sozinha a cada 3,5 s. Para com o mouse em cima
+  // e por 6 s depois de qualquer toque, clique ou rolagem; não anda para quem pediu menos movimento.
+  const vitrine = $(".vitrine");
+  const area = vitrine.closest("section");
+  const ir = dir => {
+    const passo = $("figure", vitrine).getBoundingClientRect().width + 10;
+    const noFim = vitrine.scrollLeft + vitrine.clientWidth >= vitrine.scrollWidth - 4;
+    const noInicio = vitrine.scrollLeft <= 4;
+    if (dir > 0 && noFim) vitrine.scrollTo({ left: 0, behavior: "smooth" });
+    else if (dir < 0 && noInicio) vitrine.scrollTo({ left: vitrine.scrollWidth, behavior: "smooth" });
+    else vitrine.scrollBy({ left: dir * passo, behavior: "smooth" });
+  };
+  $$("[data-vitrine]").forEach(b => b.addEventListener("click", () => ir(Number(b.dataset.vitrine))));
+  let pausaAte = 0, mouseEmCima = false;
+  vitrine.addEventListener("pointerenter", e => { if (e.pointerType === "mouse") mouseEmCima = true; });
+  vitrine.addEventListener("pointerleave", () => { mouseEmCima = false; });
+  ["pointerdown", "wheel", "touchstart", "focusin"].forEach(t => area.addEventListener(t, () => { pausaAte = Date.now() + 6000; }, { passive: true }));
+  if (!calmo) setInterval(() => { if (!mouseEmCima && !document.hidden && Date.now() > pausaAte) ir(1); }, 3500);
 </script>
 </body>
 </html>
